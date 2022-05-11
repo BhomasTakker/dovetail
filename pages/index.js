@@ -53,7 +53,8 @@ function Home({ initialState }) {
 export async function getServerSideProps() {
   //get our data from the redux store
   const currentState = store.getState();
-  if (!currentState.dovetail.data) await store.dispatch(getData()); //if !exist?
+  //There's a better less lazy check
+  if (currentState.dovetail.data.length === 0) await store.dispatch(getData());
   return {
     props: {
       initialState: store.getState(),
