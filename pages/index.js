@@ -52,7 +52,8 @@ function Home({ initialState }) {
 
 export async function getServerSideProps() {
   //get our data from the redux store
-  await store.dispatch(getData()); //if !exist?
+  const currentState = store.getState();
+  if (!currentState.dovetail.data) await store.dispatch(getData()); //if !exist?
   return {
     props: {
       initialState: store.getState(),
